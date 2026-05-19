@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html.dark {
+    --color-bg: #0a0a0f;
+    --color-surface: #111118;
+    --color-card: #16161f;
+    --color-border: #1e1e2e;
+    --color-text: #e2e8f0;
+    --color-text-dim: #94a3b8;
+    --color-muted: #6b7280;
+  }
+
+  html:not(.dark) {
+    --color-bg: #f4f4f8;
+    --color-surface: #ffffff;
+    --color-card: #ffffff;
+    --color-border: #e2e8f0;
+    --color-text: #0f172a;
+    --color-text-dim: #475569;
+    --color-muted: #94a3b8;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-auction-accent hover:bg-auction-accent-hover text-black font-semibold px-6 py-3 transition-all duration-200 tracking-wide;
+  }
+
+  .btn-ghost {
+    @apply border border-auction-border hover:border-auction-accent text-auction-text-dim hover:text-auction-accent px-6 py-3 transition-all duration-200;
+  }
+
+  .input-field {
+    @apply w-full bg-auction-surface border border-auction-border text-auction-text placeholder-auction-muted px-4 py-3 focus:outline-none focus:border-auction-accent transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-auction-card border border-auction-border;
+  }
+}
