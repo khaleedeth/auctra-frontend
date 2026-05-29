@@ -58,74 +58,72 @@ export default function Auctions() {
     ended: auctions.filter((a) => a.status === "ended").length,
   };
 
-  return (
-    <div className="min-h-screen bg-auction-bg">
-      
+ return (
+  <div className="min-h-screen bg-auction-bg">
+    <main className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10">
 
-      <main className="max-w-6xl mx-auto px-6 py-10">
+      {/* Header */}
+      <div className="mb-6 md:mb-8">
+        <h1 className="font-display text-3xl md:text-5xl text-auction-text tracking-wider mb-1">
+          LIVE AUCTIONS
+        </h1>
+        <p className="text-auction-muted text-sm">
+          {counts.active} active · {counts.pending} upcoming · {counts.ended} ended
+        </p>
+      </div>
 
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="font-display text-5xl text-auction-text tracking-wider mb-1">
-            LIVE AUCTIONS
-          </h1>
-          <p className="text-auction-muted text-sm">
-            {counts.active} active · {counts.pending} upcoming · {counts.ended} ended
-          </p>
-        </div>
+      {/* Filter tabs — scrollable on mobile */}
+      <div className="flex gap-1 md:gap-2 mb-6 md:mb-8 border-b border-auction-border pb-4 overflow-x-auto scrollbar-none">
+        {["all", "active", "pending", "ended"].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setFilter(tab)}
+            className={`px-3 md:px-4 py-2 text-xs md:text-sm font-medium uppercase tracking-widest transition-colors duration-200 whitespace-nowrap ${
+              filter === tab
+                ? "text-auction-accent border-b-2 border-auction-accent -mb-[17px]"
+                : "text-auction-muted hover:text-auction-text"
+            }`}
+          >
+            {tab} ({counts[tab]})
+          </button>
+        ))}
+      </div>
 
-        {/* Filter tabs */}
-        <div className="flex gap-2 mb-8 border-b border-auction-border pb-4">
-          {["all", "active", "pending", "ended"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setFilter(tab)}
-              className={`px-4 py-2 text-sm font-medium uppercase tracking-widest transition-colors duration-200 ${
-                filter === tab
-                  ? "text-auction-accent border-b-2 border-auction-accent -mb-[17px]"
-                  : "text-auction-muted hover:text-auction-text"
-              }`}
-            >
-              {tab} ({counts[tab]})
-            </button>
+      {/* Loading skeletons */}
+      {loading && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="card p-6 animate-pulse">
+              <div className="h-5 bg-auction-border rounded w-3/4 mb-3" />
+              <div className="h-3 bg-auction-border rounded w-full mb-2" />
+              <div className="h-3 bg-auction-border rounded w-2/3 mb-6" />
+              <div className="h-7 bg-auction-border rounded w-1/3" />
+            </div>
           ))}
         </div>
+      )}
 
-        {/* States */}
-        {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="card p-6 animate-pulse">
-                <div className="h-5 bg-auction-border rounded w-3/4 mb-3" />
-                <div className="h-3 bg-auction-border rounded w-full mb-2" />
-                <div className="h-3 bg-auction-border rounded w-2/3 mb-6" />
-                <div className="h-7 bg-auction-border rounded w-1/3" />
-              </div>
-            ))}
-          </div>
-        )}
+      {error && (
+        <div className="text-red-400 bg-red-400/10 border border-red-400/20 px-4 md:px-6 py-4">
+          {error}
+        </div>
+      )}
 
-        {error && (
-          <div className="text-red-400 bg-red-400/10 border border-red-400/20 px-6 py-4">
-            {error}
-          </div>
-        )}
+      {!loading && !error && filtered.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-auction-muted text-lg">No {filter} auctions found</p>
+        </div>
+      )}
 
-        {!loading && !error && filtered.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-auction-muted text-lg">No {filter} auctions found</p>
-          </div>
-        )}
+      {!loading && !error && filtered.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in">
+          {filtered.map((auction) => (
+            <AuctionCard key={auction._id} auction={auction} />
+          ))}
+        </div>
+      )}
 
-        {!loading && !error && filtered.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in">
-            {filtered.map((auction) => (
-              <AuctionCard key={auction._id} auction={auction} />
-            ))}
-          </div>
-        )}
-
-      </main>
-    </div>
-  );
+    </main>
+  </div>
+);
 }

@@ -66,19 +66,19 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-auction-bg">
 
-      <main className="max-w-2xl mx-auto px-6 py-10">
+      <main className="max-w-2xl mx-auto px-4 md:px-6 py-6 md:py-10">
 
         {/* Header */}
         <div className="mb-8">
           <p className="text-auction-accent text-xs uppercase tracking-widest mb-1">
             Admin Panel
           </p>
-          <h1 className="font-display text-5xl text-auction-text tracking-wider">
+          <h1 className="font-display text-3xl md:text-5xl text-auction-text tracking-wider">
             CREATE AUCTION
           </h1>
         </div>
 
-        <div className="card p-8 space-y-6">
+        <div className="card p-4 md:p-8 space-y-6">
 
           {/* Title */}
           <div>
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Times */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="text-auction-text-dim text-xs uppercase tracking-widest block mb-2">
                 Start Time
