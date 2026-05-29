@@ -48,6 +48,8 @@ export default function AdminDashboard() {
       const res = await api.post("/auctions/create", {
         ...form,
         startingPrice: Number(startingPrice),
+        startTime: new Date(startTime).toISOString(),
+        endTime: new Date(endTime).toISOString(),
       });
 
       setSuccess(`Auction "${res.data.title}" created successfully!`);
