@@ -1,4 +1,5 @@
 import Sidebar from "./Sidebar";
+import WelcomeModal from "./WelcomeModal";
 
 export default function Layout({ children }) {
   return (
@@ -12,6 +13,7 @@ export default function Layout({ children }) {
       <main className="flex-1 mt-14 md:mt-0 md:ml-16 transition-all duration-300">
         {children}
       </main>
+      <WelcomeModal />
     </div>
   );
 }

@@ -18,11 +18,13 @@ export function AuthProvider({ children }) {
 
   const login = (userData, token) => {
     localStorage.setItem("token", token);
+    sessionStorage.setItem("auctra_welcome_seen"); // Don't show welcome modal after login
     setUser(userData);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
+    sessionStorage.removeItem("auctra_welcome_seen");
     setUser(null);
   };
 
